@@ -6,17 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical">
+
     <TextView
-        android:textColor="#7e974a"
         android:id="@+id/titleView"
         android:layout_width="wrap_content"
         android:layout_height="43dp"
-        android:text="SmartIon"
         android:layout_marginLeft="15dp"
+        android:text="SmartIons"
+        android:textColor="#7e974a"
         android:textSize="35dp"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteY="16dp" />
 
     <LinearLayout
         android:layout_marginLeft="15dp"
@@ -111,8 +112,8 @@
 
             <TextView
                 android:id="@+id/StatusView2"
-                android:layout_width="wrap_content"
-                android:layout_height="43dp"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="15dp"
                 android:text="n/A"

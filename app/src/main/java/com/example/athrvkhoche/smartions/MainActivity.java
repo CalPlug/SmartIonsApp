@@ -48,6 +48,7 @@ import static java.lang.Thread.sleep;
 public class MainActivity extends AppCompatActivity{
 
     int x;
+    String start;
     Button prefButton;
     TextView status;
     Intent prefIntent;
@@ -254,6 +255,7 @@ public class MainActivity extends AppCompatActivity{
     public void clickGoButton(int index){
         RequestQueue queue = Volley.newRequestQueue(this);
         x = index;
+
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, GET_URL,null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -261,7 +263,6 @@ public class MainActivity extends AppCompatActivity{
 
                         sendButtonInfo(response, x);
                         Log.d("Request", "success");
-                        Toast.makeText(MainActivity.this, "success", Toast.LENGTH_LONG ).show();
                     }
 
                 }, new Response.ErrorListener() {
@@ -285,8 +286,10 @@ public class MainActivity extends AppCompatActivity{
 
     public void sendButtonInfo(JSONObject obj, int index){
         String schedId = "";
+        start = "TBD";
         try {
             schedId =  String.valueOf(obj.getJSONArray("schedules").getJSONObject(index).get("schedId"));
+            start = "Your charging will start at " + String.valueOf(obj.getJSONArray("schedules").getJSONObject(index).get("startTime"));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -294,7 +297,11 @@ public class MainActivity extends AppCompatActivity{
 
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        Toast.makeText(MainActivity.this, schedId, Toast.LENGTH_LONG).show() ;
+        //hello
+        
+
+        Toast.makeText(MainActivity.this,  start ,Toast.LENGTH_LONG ).show();
+
         String url = "http://pluto.calit2.uci.edu:8082/v1/schedule/" + schedId +  "select/evse/evse_sim";
         StringRequest postRequest = new StringRequest(Method.POST, url,
                 new Response.Listener<String>()
@@ -391,7 +398,7 @@ public class MainActivity extends AppCompatActivity{
                     public void onResponse(JSONObject response) {
                         parseJSON(response);
                         Log.d("Request", "success");
-                        Toast.makeText(MainActivity.this, "success", Toast.LENGTH_LONG ).show();
+                        //Toast.makeText(MainActivity.this, "success", Toast.LENGTH_LONG ).show();
                     }
 
                 }, new Response.ErrorListener() {
